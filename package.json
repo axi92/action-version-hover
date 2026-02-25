@@ -1,0 +1,43 @@
+{
+  "name": "action-version-hover",
+  "displayName": "GitHub Action Version From SHA",
+  "description": "Shows the release tag or version when hovering over GitHub Action SHA references in workflow files.",
+  "version": "0.0.1",
+  "publisher": "axi92",
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.13",
+    "@types/vscode": "^1.109.0",
+    "@vscode/vsce": "^3.7.1",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "vscode": "^1.109.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:yaml",
+    "onLanguage:json"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "github-actions",
+        "aliases": [
+          "GitHub Actions",
+          "github-actions"
+        ],
+        "extensions": [
+          ".yml",
+          ".yaml"
+        ]
+      }
+    ]
+  }
+}
