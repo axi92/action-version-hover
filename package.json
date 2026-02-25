@@ -42,6 +42,33 @@
           ".yaml"
         ]
       }
-    ]
+    ],
+    "commands": [
+      {
+        "command": "actionVersionHover.addVersion",
+        "title": "Add version as comment"
+      }
+    ],
+    "configuration": {
+      "title": "GitHub Action Version Hover",
+      "properties": {
+        "actionVersionHover.autoUpdateComment": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically update trailing '# vX.Y.Z' comments when the SHA on a 'uses:' line changes."
+        },
+        "actionVersionHover.autoInsertComment": {
+          "type": "boolean",
+          "default": false,
+          "description": "If no version comment exists and there is no other comment on the line, automatically insert '# vX.Y.Z'."
+        },
+        "actionVersionHover.updateOn": {
+          "type": "string",
+          "enum": ["save", "type", "open"],
+          "default": "save",
+          "description": "When to run automatic updates: 'save' (safe), 'type' (debounced), or 'open' (when the file is opened)."
+        }
+      }
+    }
   }
 }
