@@ -74,7 +74,7 @@ export function activate(ctx: vscode.ExtensionContext) {
         if (version) {
           md.appendMarkdown(`#### 🏷 Tag: **${version}**\n\n`);
           const args = encodeURIComponent(JSON.stringify([version, position.line]));
-          md.appendMarkdown(`👉 command:actionVersionHover.addVersion?${args}\n\n`);
+          md.appendMarkdown(`👉 [**Add version as comment**](command:actionVersionHover.addVersion?${args})\n\n`);
         } else {
           md.appendMarkdown(`#### ❌ No tag found for this SHA\n\n`);
         }
