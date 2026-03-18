@@ -2,7 +2,7 @@
   "name": "action-version-hover",
   "displayName": "GitHub Action Version From SHA",
   "description": "Shows the release tag or version when hovering over GitHub Action SHA references in workflow files.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "axi92",
   "repository": {
     "url": "https://github.com/axi92/action-version-hover"
