@@ -47,6 +47,10 @@
       {
         "command": "actionVersionHover.addVersion",
         "title": "Add version as comment"
+      },
+      {
+        "command": "actionVersionHover.updateToLatest",
+        "title": "Update action to latest version"
       }
     ],
     "configuration": {
@@ -67,6 +71,11 @@
           "enum": ["save", "type", "open"],
           "default": "save",
           "description": "When to run automatic updates: 'save' (safe), 'type' (debounced), or 'open' (when the file is opened)."
+        },
+        "actionVersionHover.autoUpdateToLatestOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "When saving, automatically update all 'uses:' SHAs to the latest available version for each action (also updates the '# vX.Y.Z' comment). Respects the 'updateOn' trigger setting."
         }
       }
     }
