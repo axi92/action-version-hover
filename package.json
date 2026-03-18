@@ -19,6 +19,7 @@
     "@vscode/vsce": "^3.7.1",
     "typescript": "^5.9.3"
   },
+  "icon": "icon.png",
   "engines": {
     "vscode": "^1.109.0"
   },
