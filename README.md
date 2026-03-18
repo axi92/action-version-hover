@@ -10,15 +10,7 @@ Example:
 ```
 
 Hover shows
-```
-GitHub Action Version Info
-Repository: docker/login-action
-Commit: c94ce9fb468520275223c153574b00df6fe4bcc9
-Message: Merge pull request #915 from docker/dependabot/npm_and_yarn/lodash-4.17.23
-build(deps): bump lodash from 4.17.21 to 4.17.23
-🏷 Tag: v3.7.0
-👉 Add version as comment
-```
+<img width="735" height="299" alt="image" src="https://github.com/user-attachments/assets/30738907-32e4-46ec-8fc4-e9c6f0599fe5" />
 
 When clicking the link in the hover window the version is appended as a comment.
 
