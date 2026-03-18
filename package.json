@@ -51,6 +51,10 @@
       {
         "command": "actionVersionHover.updateToLatest",
         "title": "Update action to latest version"
+      },
+      {
+        "command": "actionVersionHover.refresh",
+        "title": "Refresh action version cache"
       }
     ],
     "configuration": {
@@ -68,7 +72,11 @@
         },
         "actionVersionHover.updateOn": {
           "type": "string",
-          "enum": ["save", "type", "open"],
+          "enum": [
+            "save",
+            "type",
+            "open"
+          ],
           "default": "save",
           "description": "When to run automatic updates: 'save' (safe), 'type' (debounced), or 'open' (when the file is opened)."
         },

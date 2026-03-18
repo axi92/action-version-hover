@@ -112,8 +112,27 @@ export function activate(ctx: vscode.ExtensionContext) {
     )
   );
 
+
   //
-  // 3) Hover Provider - shows current tag + "Update to latest" link when a newer version exists
+  // 3) Command: Refresh / invalidate cache for a specific action
+  //
+  ctx.subscriptions.push(
+    vscode.commands.registerCommand(
+      "actionVersionHover.refresh",
+      async (repo: string, sha: string) => {
+        // Bust hover cache for this exact entry
+        hoverCache.delete(`${repo}:${sha}`);
+        // Bust tags cache so the next hover re-fetches from GitHub
+        tagsCache.delete(repo);
+        vscode.window.setStatusBarMessage(`Cache cleared for ${repo} - hover again to load fresh data`, 3000);
+        // Re-trigger the hover at the current cursor position
+        await vscode.commands.executeCommand("editor.action.showHover");
+      }
+    )
+  );
+
+  //
+  // 4) Hover Provider - shows current tag + "Update to latest" link when a newer version exists
   //
   ctx.subscriptions.push(
     vscode.languages.registerHoverProvider(["yaml", "json"], {
@@ -152,7 +171,7 @@ export function activate(ctx: vscode.ExtensionContext) {
         // Show update link only when a newer version is available
         if (latestTag) {
           const isLatest = latestTag.sha.toLowerCase() === sha.toLowerCase();
-          
+
           md.appendMarkdown(`---\n\n`);
           if (isLatest) {
             md.appendMarkdown(`✅ Already on latest version (**${latestTag.name}**)\n\n`);
@@ -161,6 +180,10 @@ export function activate(ctx: vscode.ExtensionContext) {
             md.appendMarkdown(`⬆️ Latest: **${latestTag.name}** - [**Update to latest version**](command:actionVersionHover.updateToLatest?${updateArgs})\n\n`);
           }
         }
+        // Refresh link
+        const refreshArgs = encodeURIComponent(JSON.stringify([repo, sha]));
+        md.appendMarkdown(`---\n\n`);
+        md.appendMarkdown(`🔄 [Clear cache & reload on next hover](command:actionVersionHover.refresh?${refreshArgs})\n\n`);
 
         const hover = new vscode.Hover(md);
         hoverCache.set(cacheKey, hover);
@@ -483,7 +506,7 @@ function githubApi(path: string): Promise<any | null> {
         res.on("data", chunk => (data += chunk));
         res.on("end", () => {
           try {
-            if (res.statusCode && res.statusCode >= 400){
+            if (res.statusCode && res.statusCode >= 400) {
               console.warn(`action-version-hover: ${res.statusCode}`);
               return resolve(null);
             }
